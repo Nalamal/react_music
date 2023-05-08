@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 
-export const BannerWrapper = styled.div`
+interface BannerProps {
+  bgImage?: string
+}
+export const BannerWrapper = styled.div<BannerProps>`
+  background: url(${(props) => props.bgImage}) center center/6000px;
+
   .banner {
     height: 270px;
+
     display: flex;
     position: relative;
   }
@@ -12,12 +18,28 @@ export const BannerLeft = styled.div`
   position: relative;
   width: 730px;
 
+  .banner-list {
+    position: relative;
+  }
+
   .banner-item {
+    position: absolute;
+    left: 0;
+    top: 0;
     overflow: hidden;
     height: 270px;
     .image {
       width: 100%;
     }
+  }
+
+  .fade-exit {
+    opacity: 1;
+  }
+
+  .fade-exit-active {
+    opacity: 0.2;
+    transition: opacity 1s ease-out;
   }
 
   .dots {
@@ -47,6 +69,7 @@ export const BannerLeft = styled.div`
     }
   }
 `
+
 export const BannerRight = styled.a.attrs({
   href: 'https://music.163.com/#/download',
   target: '_blank'
