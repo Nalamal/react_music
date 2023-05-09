@@ -1,8 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import type { FC, ReactNode } from 'react'
-import { useAppSelector } from '@/store'
+import { shallowEqualApp, useAppSelector } from '@/store'
 import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from './style'
-import { shallowEqual } from 'react-redux'
 import classNames from 'classnames'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
 
@@ -23,7 +22,7 @@ const TopBanner: FC<IProps> = () => {
     (state) => ({
       banners: state.recommend.banners
     }),
-    shallowEqual
+    shallowEqualApp
   )
   useEffect(() => {
     if (!banners.length) return
