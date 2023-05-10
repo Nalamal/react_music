@@ -1,21 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getBanners, getHotRecommend, getNewAlbum } from '../service/recommend'
 
-export const fetchRecommendDataAction = createAsyncThunk(
-  'fetchdata',
-  (_, { dispatch }) => {
-    // 1. 获取轮播图数据
-    getBanners().then((res) => {
-      dispatch(changeBannersAction(res.banners))
-    })
-    // 2. 获取热门推荐数据
-    getHotRecommend(8).then((res) => {
-      dispatch(changeHotRecommendsAction(res.result))
-    })
-    // 3. 获取最新唱片数据
-    getNewAlbum().then((res) => {
-      dispatch(changeNewAlbumsAction(res.albums))
-    })
+// 发送获取轮播数据的请求
+export const fetchBannerDataAction = createAsyncThunk(
+  'banners',
+  async (arg, { dispatch }) => {
+    const res = await getBanners()
+    dispatch(changeBannersAction(res.banners))
+  }
+)
+
+// 发送获取热门推荐的请求
+export const fetchHotRecommendAction = createAsyncThunk(
+  'hotRecommend',
+  async (arg, { dispatch }) => {
+    const res = await getHotRecommend(8)
+    dispatch(changeHotRecommendsAction(res.result))
+  }
+)
+
+// 发送获取最新唱片的请求
+export const fetchNewAlbumAction = createAsyncThunk(
+  'newAlbum',
+  async (arg, { dispatch }) => {
+    const res = await getNewAlbum()
+    dispatch(changeNewAlbumsAction(res.albums))
   }
 )
 
