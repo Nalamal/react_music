@@ -23,3 +23,13 @@ export function getNewAlbum() {
     url: '/album/newest'
   })
 }
+
+// 定义获取榜单的请求
+export function getPlaylistDetail(id: number) {
+  return myRequest.get({
+    url: '/playlist/detail',
+    params: {
+      id
+    }
+  })
+}

@@ -2,6 +2,7 @@ import { useAppDispatch } from '@/store'
 import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import {
+  fetchRankingDataAction,
   // fetchBannerDataAction,
   // fetchHotRecommendAction,
   // fetchNewAlbumAction,
@@ -11,6 +12,7 @@ import TopBanner from './c-cpns/top-banner'
 import { RecommendWrapper } from './style'
 import HotRecommend from './c-cpns/hot-recommend'
 import NewAlbum from './c-cpns/new-album'
+import TopRanking from './c-cpns/top-ranking'
 
 interface IProps {
   children?: ReactNode
@@ -24,6 +26,7 @@ const Recommend: FC<IProps> = () => {
     // dispatch(fetchBannerDataAction())
     // dispatch(fetchHotRecommendAction())
     // dispatch(fetchNewAlbumAction())
+    dispatch(fetchRankingDataAction())
   }, [])
 
   // jsx render函数的返回
@@ -34,6 +37,7 @@ const Recommend: FC<IProps> = () => {
         <div className="left">
           <HotRecommend />
           <NewAlbum />
+          <TopRanking />
         </div>
         <div className="right">right</div>
       </div>
