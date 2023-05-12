@@ -33,3 +33,13 @@ export function getPlaylistDetail(id: number) {
     }
   })
 }
+
+// 定义获取歌手列表的请求
+export function getArtistList(limit = 30) {
+  return myRequest.get({
+    url: '/artist/list',
+    params: {
+      limit
+    }
+  })
+}

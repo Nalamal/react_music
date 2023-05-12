@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
+  getArtistList,
   getBanners,
   getHotRecommend,
   getNewAlbum,
@@ -20,6 +21,10 @@ export const fetchRecommendDataAction = createAsyncThunk(
     // 3. 获取最新唱片数据
     getNewAlbum().then((res) => {
       dispatch(changeNewAlbumsAction(res.albums))
+    })
+    // 4. 获取歌手列表数据
+    getArtistList(5).then((res) => {
+      dispatch(changeSettleSingersAction(res.artists))
     })
   }
 )
@@ -67,6 +72,7 @@ interface IRecommendState {
   hotRecommends: any[]
   newAlbums: any[]
   rankings: any[]
+  settleSingers: any[]
 }
 
 // 定义轮播数据
@@ -74,7 +80,8 @@ const initialState: IRecommendState = {
   banners: [],
   hotRecommends: [],
   newAlbums: [],
-  rankings: []
+  rankings: [],
+  settleSingers: []
 }
 
 // 储存轮播数据的仓库
@@ -93,6 +100,9 @@ const recommendSlice = createSlice({
     },
     changeRankingsAction(state, { payload }) {
       state.rankings = payload
+    },
+    changeSettleSingersAction(state, { payload }) {
+      state.settleSingers = payload
     }
   }
   /** 
@@ -118,7 +128,8 @@ export const {
   changeBannersAction,
   changeHotRecommendsAction,
   changeNewAlbumsAction,
-  changeRankingsAction
+  changeRankingsAction,
+  changeSettleSingersAction
 } = recommendSlice.actions
 
 export default recommendSlice.reducer
