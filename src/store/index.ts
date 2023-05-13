@@ -7,15 +7,17 @@ import {
 } from 'react-redux'
 
 import recommendReducer from '@/views/discover/c-views/recommend/store/recommend'
+import playerReducer from '@/views/player/store/player'
 
 const store = configureStore({
   reducer: {
-    recommend: recommendReducer
+    recommend: recommendReducer,
+    player: playerReducer
   }
 })
 
 type GetStateFnType = typeof store.getState
-type IRootState = ReturnType<GetStateFnType>
+export type IRootState = ReturnType<GetStateFnType>
 type DispatchType = typeof store.dispatch
 
 // useAppSelector的hook
