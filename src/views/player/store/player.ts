@@ -155,6 +155,7 @@ const initialState: IPlayState = {
   },
   lyrics: [],
   lyricIndex: -1,
+
   playSongList: [
     {
       name: '有何不可',

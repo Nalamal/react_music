@@ -5,6 +5,7 @@ export interface ILyricInfo {
   content: string
 }
 
+// 处理歌词数据
 export function parseLyric(lyricString: string) {
   const lineStrings = lyricString.split('\n')
 

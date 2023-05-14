@@ -1,6 +1,17 @@
 import styled from 'styled-components'
 
-export const PlayerBarWrapper = styled.div`
+/* background-position: ${(props) => {
+  switch (props.sequence) {
+    case 1:
+      return '-66px -248px'
+    case 2:
+      return '-66px -344px'
+    default:
+      return '-3px -344px'
+  }
+}}; */
+
+export const BarWrapper = styled.div`
   position: fixed;
   z-index: 99;
   left: 0;
@@ -25,19 +36,15 @@ export const PlayerBarWrapper = styled.div`
 interface IBarControl {
   isPlaying: boolean
 }
-
 export const BarControl = styled.div<IBarControl>`
   display: flex;
   align-items: center;
-
-  .btn {
-    cursor: pointer;
-  }
 
   .prev,
   .next {
     width: 28px;
     height: 28px;
+    cursor: pointer;
   }
 
   .prev {
@@ -55,7 +62,8 @@ export const BarControl = styled.div<IBarControl>`
     background-position: -80px -130px;
   }
 `
-export const BarPlayerInfo = styled.div`
+
+export const BarPlayInfo = styled.div`
   display: flex;
   width: 642px;
   align-items: center;
@@ -107,12 +115,8 @@ export const BarPlayerInfo = styled.div`
           width: 22px;
           height: 24px;
           border: none;
-          margin-top: -4px;
+          margin-top: -7px;
           background: url(${require('@/assets/img/sprite_icon.png')}) 0 -250px;
-          &::before,
-          &::after {
-            display: none;
-          }
         }
       }
 
@@ -128,7 +132,10 @@ export const BarPlayerInfo = styled.div`
   }
 `
 
-export const BarOperator = styled.div`
+interface IBarOperator {
+  playMode: number
+}
+export const BarOperator = styled.div<IBarOperator>`
   display: flex;
   align-items: center;
   position: relative;
@@ -168,7 +175,16 @@ export const BarOperator = styled.div`
     }
 
     .loop {
-      background-position: -66px -248px;
+      background-position: ${(props) => {
+        switch (props.playMode) {
+          case 1:
+            return '-66px -248px'
+          case 2:
+            return '-66px -344px'
+          default:
+            return '-3px -344px'
+        }
+      }};
     }
 
     .playlist {
