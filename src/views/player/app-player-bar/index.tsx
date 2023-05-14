@@ -46,11 +46,11 @@ const AppPlayerBar: FC<IProps> = () => {
     audioRef.current
       .play()
       .then(() => {
-        console.log('播放成功')
+        // console.log('播放成功')
         setIsPlaying(true)
       })
-      .catch((err) => {
-        console.log('播放失败:', err)
+      .catch(() => {
+        // console.log('播放失败:', err)
         setIsPlaying(false)
       })
     setDuration(currentSong.dt)
@@ -78,6 +78,7 @@ const AppPlayerBar: FC<IProps> = () => {
         break
       }
     }
+
     // 4.匹配歌词
     if (lyricIndex === index || index === -1) return
     dispatch(changeLyricIndexAction(index))
@@ -166,7 +167,7 @@ const AppPlayerBar: FC<IProps> = () => {
           <div className="info">
             <div className="song">
               <span className="song-name">{currentSong.name}</span>
-              <span className="singer-name">{currentSong.ar[0].name}</span>
+              <span className="singer-name">{currentSong.ar?.[0].name}</span>
             </div>
             <div className="progress">
               <Slider
