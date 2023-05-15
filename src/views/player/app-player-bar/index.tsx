@@ -46,11 +46,11 @@ const AppPlayerBar: FC<IProps> = () => {
     audioRef.current
       .play()
       .then(() => {
-        // console.log('播放成功')
+        console.log('播放成功')
         setIsPlaying(true)
       })
-      .catch(() => {
-        // console.log('播放失败:', err)
+      .catch((err) => {
+        console.log('播放失败:', err)
         setIsPlaying(false)
       })
     setDuration(currentSong.dt)

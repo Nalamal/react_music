@@ -8,17 +8,10 @@ export const fetchCurrentSongDataAction = createAsyncThunk<
   number,
   { state: IRootState }
 >('currentSong', (id, { dispatch, getState }) => {
-  // 1.获取歌词信息
-  getSongLyric(id).then((res) => {
-    const lyricString = res.lrc.lyric
-    const lyrics = parseLyric(lyricString)
-    dispatch(changeLyricsAction(lyrics))
-  })
-
-  // 3.判断歌曲是否在列表中
+  // 准备播放某一首歌曲是，分成两种情况
+  // 1. 从列表尝试是否可以获取到这首歌
   const playSongList = getState().player.playSongList
   const findIndex = playSongList.findIndex((song) => song.id === id)
-  console.log(findIndex)
   if (findIndex !== -1) {
     // 有找到
     const currentSong = playSongList[findIndex]
@@ -29,12 +22,11 @@ export const fetchCurrentSongDataAction = createAsyncThunk<
     getSongDetail(id).then((res) => {
       if (!res.songs.length) return
       const currentSong = res.songs[0]
-
       // 2.保存到列表中
       const newPlaySongList = [...playSongList]
       newPlaySongList.push(currentSong)
-      dispatch(changePlaySongListAction(newPlaySongList))
       dispatch(changeCurrentSongAction(currentSong))
+      dispatch(changePlaySongListAction(newPlaySongList))
       dispatch(changeCurrentSongIndexAction(newPlaySongList.length - 1))
     })
   }
